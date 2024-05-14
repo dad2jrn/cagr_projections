@@ -1,0 +1,14 @@
+/* Custom styles */
+.form-control {
+    max-width: 300px;
+}
+
+#ticker {
+    text-transform: uppercase;
+}
+
+.ticker-output {
+    font-weight: bold;
+    color: black;
+    text-transform: uppercase;
+}

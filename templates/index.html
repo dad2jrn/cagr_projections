@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 class="mt-5">CAGR Calculator for Stocks</h1>
+  <p class="lead">
+    The Compound Annual Growth Rate (CAGR) is a useful measure to understand the mean annual growth rate of an investment over a specified period of time longer than one year. It represents one of the most accurate ways to calculate and determine returns for anything that can rise or fall in value over time. Investors use CAGR to compare the performance of different investments, project future returns, and assess the growth rate of a single investment.
+  </p>
+  <form method="post" class="mt-3">
+    <div class="form-group">
+      <label for="ticker">Stock Ticker Symbol</label>
+      <input type="text" class="form-control" id="ticker" name="ticker" placeholder="Enter stock ticker" required>
+    </div>
+    <div class="form-group">
+      <label for="period">Number of Years for CAGR Calculation</label>
+      <input type="number" class="form-control" id="period" name="period" min="1" max="20" value="10" required>
+    </div>
+    <div class="form-group">
+      <label for="future_period">Number of Years to Project into the Future</label>
+      <input type="number" class="form-control" id="future_period" name="future_period" min="1" max="30" value="20" required>
+    </div>
+    <div class="form-group">
+      <label for="initial_investment">Initial Investment Amount ($)</label>
+      <input type="number" class="form-control" id="initial_investment" name="initial_investment" min="100" value="13500" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Calculate</button>
+  </form>
+
+  {% if result %}
+    <div class="mt-5">
+      <h2>Results</h2>
+      <p>The CAGR of <strong class="ticker-output">{{ result.ticker }}</strong> over the past <strong>{{ result.period }} years</strong> is <span style="color:blue;"><strong>{{ (result.cagr * 100)|round(2) }}%</strong></span>.</p>
+      <p>The projected value of an initial investment of <span style="color:green;"><strong>${{ "{:,.2f}".format(result.initial_investment) }}</strong></span> over the next <strong>{{ result.future_period }} years</strong> is approximately <span style="color:green;"><strong>${{ "{:,.2f}".format(result.future_value) }}</strong></span>.</p>
+    </div>
+  {% endif %}
+{% endblock %}
